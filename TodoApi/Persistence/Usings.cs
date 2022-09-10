@@ -1,0 +1,14 @@
+﻿global using Application.Interfaces;
+global using Application.Interfaces.Repositories;
+global using Domain.Common;
+global using Domain.Entities;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Persistence.Contexts;
+global using Persistence.Repositories;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;

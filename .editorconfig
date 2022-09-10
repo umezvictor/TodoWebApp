@@ -1,0 +1,6 @@
+﻿Error while validating the service descriptor 'ServiceType: Web.Client.Services.IUserManagementService Lifetime: 
+Transient ImplementationType: Web.Client.Services.UserManagementService': Unable to resolve service for type 
+'Microsoft.AspNetCore.Identity.UserManager`1[Web.Client.Models.AppUser]' 
+while attempting to activate 'Web.Client.Services.UserManagementService'.
+
+https://epicbootstrap.com/snippets/registration

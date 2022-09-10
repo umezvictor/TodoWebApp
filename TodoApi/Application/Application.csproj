@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\Employer\**" />
+    <Compile Remove="Features\Identification\**" />
+    <Compile Remove="Features\Info\**" />
+    <Compile Remove="Features\Kin\**" />
+    <EmbeddedResource Remove="Features\Employer\**" />
+    <EmbeddedResource Remove="Features\Identification\**" />
+    <EmbeddedResource Remove="Features\Info\**" />
+    <EmbeddedResource Remove="Features\Kin\**" />
+    <None Remove="Features\Employer\**" />
+    <None Remove="Features\Identification\**" />
+    <None Remove="Features\Info\**" />
+    <None Remove="Features\Kin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="11.0.3" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.0.3" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+</Project>
