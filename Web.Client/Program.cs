@@ -10,7 +10,7 @@ var _config = new ConfigurationBuilder()
                 .Build();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {

@@ -2,7 +2,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-
+<div class="card">
+  <div class="card-body">
+       <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal" id="testll">Add New Todo</button>
 <table id="basic-datatable" class="table table-striped table-bordered table-sm key-buttons border-bottom">
   <thead>
     <tr>
@@ -14,16 +16,98 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Wash</td>
-      <td>False</td>
+    <tr id="1">
+      <th scope="row" id="todo">1</th>
+      <td id="title">Wash</td>
+      <td id="">False</td>
       <td>
-          <button class="btn btn-sm viewTransactionsBtn" id="" onclick="viewTransactions('')"  type="button"><i class="fas fa-pen text-success"></i></button>
-           <button class="btn btn-sm viewTransactionsBtn" id="" onclick="viewTransactions('')"  type="button"><i class="fas fa-trash text-danger"></i></button>
+          <button class="btn btn-sm edit"  type="button"><i class="fas fa-pen text-success"></i></button>
+           <button class="btn btn-sm delete" id="2"  type="button"><i class="fas fa-trash text-danger"></i></button>
+      </td>
+     
+    </tr>
+
+    <tr id="2">
+      <th scope="row" id="todo">1</th>
+      <td id="title">cook</td>
+      <td id="">False</td>
+      <td>
+          <button class="btn btn-sm edit"  type="button"><i class="fas fa-pen text-success"></i></button>
+           <button class="btn btn-sm delete"  type="button"><i class="fas fa-trash text-danger"></i></button>
       </td>
      
     </tr>
     
+    
   </tbody>
 </table>
+  </div>
+</div>
+
+
+
+<!--Add Todo Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Add New Todo Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="addTodoForm">
+          <input type="hidden" id="todoId" value="">
+          <div class="form-group">
+            <label for="tile">Title</label>
+            <input type="text" class="form-control" id="title">
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!--Edit Todo Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Update Todo Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="editTodoForm">
+          <div class="form-group">
+            <label for="exampleInputEmail1">User Id</label>
+            <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+           
+          </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="etitle">
+          </div>
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Completed</label>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
