@@ -6,7 +6,17 @@
     <title>@ViewData["Title"] - Web.Client</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
     <link rel="stylesheet" href="~/Web.Client.styles.css" asp-append-version="true" />
+    <!-- Data table css -->
+    <link href="~/admin/assets/plugins/datatable/css/dataTables.bootstrap5.css" rel="stylesheet" />
+    <link href="~/admin/assets/plugins/datatable/css/buttons.bootstrap5.min.css" rel="stylesheet">
+    <link href="~/admin/assets/plugins/datatable/responsive.bootstrap5.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   @* <script src="https://use.fontawesome.com/27c2d70123.js"></script>
+*@
 </head>
 <body>
     <header>
@@ -43,7 +53,26 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+   <!-- JQuery min js -->
+  @*  <script src="~/admin/assets/plugins/jquery/jquery.min.js"></script>*@
+
+    <script src="~/js/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/js/datatable/dataTables.bootstrap5.js"></script>
+    <script src="~/js/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/js/datatable/buttons.bootstrap5.min.js"></script>
+
+    <script src="~/js/datatable/dataTables.responsive.min.js"></script>
+    <script src="~/js/datatable/responsive.bootstrap5.min.js"></script>
+    <script src="~/js/datatable/table-data.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- Bootstrap js -->
+   @* <script src="~/admin/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/admin/assets/plugins/bootstrap/js/bootstrap.min.js"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/app.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
