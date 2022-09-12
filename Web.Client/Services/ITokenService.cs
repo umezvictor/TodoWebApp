@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Web.Client.Responses;
 
 namespace Web.Client.Services
 {
@@ -6,5 +7,6 @@ namespace Web.Client.Services
     {
         string GenerateAccessToken(IEnumerable<Claim> claims);
         bool ValidateJwtToken(string token);
+        public ApiTokenResponse? GetApiToken();
     }
 }

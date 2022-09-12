@@ -1,7 +1,9 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Web.Client.Responses;
 
 namespace Web.Client.Services
 {
@@ -60,6 +62,51 @@ namespace Web.Client.Services
                 
                 return false;
             }
+        }
+
+         public ApiTokenResponse? GetApiToken()
+         {
+           
+            try
+            {
+                var client = new HttpClient();
+                var res = "";               
+                var clientId = _configuration.GetSection("ClientId").Value;
+                var clientSecret = _configuration.GetSection("ClientSecret").Value;               
+                var grantType = _configuration.GetSection("GrantType").Value;               
+                var scope = _configuration.GetSection("Scope").Value;               
+                var tokenUrl = _configuration.GetSection("TokenUrl").Value; 
+                
+                var data = new[]
+                {
+                new KeyValuePair<string, string>("client_id", clientId),
+                new KeyValuePair<string, string>("client_secret", clientSecret),
+                new KeyValuePair<string, string>("scope", $"{scope}"),
+                new KeyValuePair<string, string>("grant_type", grantType)
+                };
+
+                HttpResponseMessage resp = client.PostAsync(tokenUrl, new FormUrlEncodedContent(data)).GetAwaiter().GetResult();               
+                if (resp.IsSuccessStatusCode)
+                {
+                    res = resp.Content.ReadAsStringAsync().Result;
+                    var tokenResponse = JsonConvert.DeserializeObject<ApiTokenResponse>(res);
+                    
+                    return tokenResponse;
+                }
+                else
+                {
+                    
+                    return null;
+                }
+
+            }
+            catch
+            {               
+                return null;
+            }
+
+
+
         }
     }
 }

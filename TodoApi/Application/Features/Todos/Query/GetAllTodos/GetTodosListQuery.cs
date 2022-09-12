@@ -21,31 +21,19 @@ namespace Application.Features.Todos.Query
         {
             private readonly ITodoRepositoryAsync _todoRepository;
             private readonly IMapper _mapper;
-            private readonly IMemoryCache _memoryCache;
+          
 
-            public GetTodosListQueryHandler(ITodoRepositoryAsync TodoRepository, IMemoryCache memoryCache, IMapper mapper)
+            public GetTodosListQueryHandler(ITodoRepositoryAsync TodoRepository, IMapper mapper)
             {
                 _todoRepository = TodoRepository;
                 _mapper = mapper;
-                _memoryCache = memoryCache;
+                
             }
             public async Task<Response<IEnumerable<TodoDto>>> Handle(GetTodosListQuery query, CancellationToken cancellationToken)
             {
 
-                var cacheKey = nameof(Todo);
-
-                if (!_memoryCache.TryGetValue(cacheKey, out IReadOnlyList<Todo> todos))
-                {
-                    todos = await _todoRepository.GetAllAsync();
-                    var cacheExpiryOptions = new MemoryCacheEntryOptions
-                    {
-                        AbsoluteExpiration = DateTime.Now.AddMinutes(5),
-                        Priority = CacheItemPriority.High,
-                        SlidingExpiration = TimeSpan.FromMinutes(2)
-                    };
-                    _memoryCache.Set(cacheKey, todos, cacheExpiryOptions);
-                }
-
+               
+                var todos = await _todoRepository.GetAllAsync();
                 var response = _mapper.Map<IEnumerable<TodoDto>>(todos);
 
                 return new Response<IEnumerable<TodoDto>>(response);
