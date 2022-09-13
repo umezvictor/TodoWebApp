@@ -5,7 +5,7 @@ namespace Web.Client.Services
 {
     public interface ITodoService
     {
-        ApiResponse<Todo> AddTodo(Todo todo);
+        ApiResponse<Todo> AddTodo(AddTodoDto todo);
         ApiResponse<Todo> DeleteTodo(int Id);
         ApiResponse<List<Todo>> GetTodos();
         ApiResponse<Todo> UpdateTodo(int id, Todo todo);

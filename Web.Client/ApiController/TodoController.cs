@@ -34,7 +34,7 @@ namespace Web.Client.ApiController
 
         // POST api/<TodoController>
         [HttpPost]
-        public IActionResult Post([FromBody] Todo todo)
+        public IActionResult Post([FromBody] AddTodoDto todo)
         {
             var userId = HttpContext.Session.GetString("Id");
             todo.UserId = userId!;

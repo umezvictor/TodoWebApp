@@ -7,24 +7,16 @@
 //add todo
 $("#addTodoForm").submit(function (event) {
     event.preventDefault();
+    var notyf = new Notyf({
+        duration: 5000,
+        position: {
+            x: 'right',
+            y: 'top',
+        }
+    });
     //get values
     var titleText = $('#title').val();
-    
-    //$.ajax({
-    //    url: 'https://localhost:5002/api/Todo',
-    //    type: 'POST',
-    //    dataType: 'application/json; charset=UTF-8',
-    //    data: JSON.stringify({ "title": titleText }),
-    //    success: function (data, textStatus, xhr) {
-    //        console.log(data);
-    //    },
-    //    error: function (xhr, textStatus, errorThrown) {
-    //        console.log('Error in Operation');
-    //    }
-    //});
-
-
-
+      
     $.ajax({
         contentType: "application/json; charset=utf-8",
         url: 'https://localhost:5002/api/Todo',
@@ -33,8 +25,17 @@ $("#addTodoForm").submit(function (event) {
         data: JSON.stringify({ "title": titleText }),
         beforeSend: function () {
         }, success: function (data) {
+            if (data.success) {
+                document.getElementById('title').value = "";
+                notyf.success(data.message);
+                loadTodos();
+               
+            } else {
+                notyf.error(data.message);
+            }
         }, complete: function () {
         }, error: function (data) {
+            notyf.success(data.message);
         }
     });
 });

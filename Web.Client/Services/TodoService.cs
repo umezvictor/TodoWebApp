@@ -55,7 +55,7 @@ namespace Web.Client.Services
         }
 
 
-        public ApiResponse<Todo> AddTodo(Todo todo)
+        public ApiResponse<Todo> AddTodo(AddTodoDto todo)
         {
             ApiResponse<Todo> apiResponse = new ApiResponse<Todo>();
 
