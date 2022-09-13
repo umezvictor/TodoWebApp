@@ -27,15 +27,20 @@ $("#addTodoForm").submit(function (event) {
         }, success: function (data) {
             if (data.success) {
                 document.getElementById('title').value = "";
+                $('#addModal').modal('hide');
                 notyf.success(data.message);
                 loadTodos();
                
             } else {
+                document.getElementById('title').value = "";
+                $('#addModal').modal('hide');
                 notyf.error(data.message);
+                loadTodos();
             }
         }, complete: function () {
         }, error: function (data) {
             notyf.success(data.message);
+            loadTodos();
         }
     });
 });
@@ -45,73 +50,103 @@ $("#addTodoForm").submit(function (event) {
 //edit todo
 $("#editTodoForm").submit(function (event) {
     event.preventDefault();
-    //get values
-    //var todo = new Object();
-    //todo.name = $('#name').val();
-    //person.surname = $('#surname').val();
 
-    var tr = ele.target.parentNode.parentNode;
-    var title = $('#title').val();
-    alert(title);
-    //$.ajax({
-    //    url: 'http://localhost:3413/api/person',
-    //    type: 'POST',
-    //    dataType: 'json',
-    //    data: person,
-    //    success: function (data, textStatus, xhr) {
-    //        console.log(data);
-    //    },
-    //    error: function (xhr, textStatus, errorThrown) {
-    //        console.log('Error in Operation');
-    //    }
-    //});
-});
+    var notyf = new Notyf({
+        duration: 5000,
+        position: {
+            x: 'right',
+            y: 'top',
+        }
+    });
 
+    var titleText = $('#etitle').val();
+    var id = $('#todoId').val();
 
+    var completed = false;
 
-
-$("#delTodo").click(function () {
-    var isConfirmed = confirm("Are you sure?");
-    if (isConfirmed) {
-        alert('hello');
+    //check if todo is completed
+    if (document.getElementById('isCompleted').checked) {
+         completed = true;
     }
 
-    //var person = new Object();
-    //person.name = $('#name').val();
-    //person.surname = $('#surname').val();
-    //$.ajax({
-    //    url: 'http://localhost:3413/api/person',
-    //    type: 'DELETE',
-    //    dataType: 'json',
-    //    data: person,
-    //    success: function (data, textStatus, xhr) {
-    //        console.log(data);
-    //    },
-    //    error: function (xhr, textStatus, errorThrown) {
-    //        console.log('Error in Operation');
-    //    }
-    //});
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: `https://localhost:5002/api/Todo/${id}`,
+        type: 'PUT',
+        dataType: 'json',
+        data: JSON.stringify({ "title": titleText, "id": id, "completed": completed }),
+        beforeSend: function () {
+        }, success: function (data) {
+            if (data.success) {
+                document.getElementById('etitle').value = "";
+                document.getElementById("isCompleted").checked = false;
+                $('#editModal').modal('hide');
+                notyf.success(data.message);
+                loadTodos();
+
+            } else {
+                document.getElementById('etitle').value = "";
+                document.getElementById("isCompleted").checked = false;
+                $('#editModal').modal('hide');
+                notyf.error(data.message);
+                loadTodos();
+            }
+        }, complete: function () {
+        }, error: function (data) {
+            notyf.success(data.message);
+            loadTodos();
+        }
+    });
 });
 
 
-function deleteTodo(todoId) {
-    alert(todoId);
+
+
+function deleteTodo(id) {
+    var notyf = new Notyf({
+        duration: 5000,
+        position: {
+            x: 'right',
+            y: 'top',
+        }
+    });
+
+    
+    $.ajax({
+        url: `https://localhost:5002/api/Todo/${id}`,
+        type: 'DELETE',
+        beforeSend: function () {
+        }, success: function (data) {
+            if (data.success) {
+                
+                notyf.success(data.message);
+                loadTodos();
+
+            } else {
+               
+                notyf.error(data.message);
+                loadTodos();
+            }
+        }, complete: function () {
+        }, error: function (data) {
+            notyf.success(data.message);
+            loadTodos();
+        }
+    });
 }
 
-//https://localhost:5002/api/todo
+
 
 
 function loadTodos() {
 
-    //alert('hello');
-
-    //var notyf = new Notyf({
-    //    duration: 5000,
-    //    position: {
-    //        x: 'right',
-    //        y: 'top',
-    //    }
-    //});
+    var notyf = new Notyf({
+        duration: 5000,
+        position: {
+            x: 'right',
+            y: 'top',
+        }
+    });
 
     var tableHolderDiv = document.getElementById('tableHolder');
     //clear the table
@@ -124,8 +159,6 @@ function loadTodos() {
         .then(res => {
             if (res.success) {
 
-
-                //console.log(res.payload);
                 const table = document.createElement('table');
                 table.setAttribute("id", "basic-datatable");
                 table.setAttribute("class", "table table-striped table-bordered table-sm key-button");
@@ -200,9 +233,7 @@ function loadTodos() {
                    //appends tds to tr
                     tr.appendChild(titleTd);
                     tr.appendChild(completeTd);
-                    tr.appendChild(actionsTd);
-
-            
+                    tr.appendChild(actionsTd);            
 
                    //append tr to tbody
                    tbody.appendChild(tr);
@@ -214,7 +245,7 @@ function loadTodos() {
             
 
             }else {
-                console.log('bad');
+                notyf.error("No record found")
             }
         })
         .catch (err => notyf.error("An error occured"));

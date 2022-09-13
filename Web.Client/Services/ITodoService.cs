@@ -8,6 +8,6 @@ namespace Web.Client.Services
         ApiResponse<Todo> AddTodo(AddTodoDto todo);
         ApiResponse<Todo> DeleteTodo(int Id);
         ApiResponse<List<Todo>> GetTodos();
-        ApiResponse<Todo> UpdateTodo(int id, Todo todo);
+        ApiResponse<Todo> UpdateTodo(int id, EditTodoDto todo);
     }
 }

@@ -96,7 +96,7 @@ namespace Web.Client.Services
         }
 
 
-        public ApiResponse<Todo> UpdateTodo(int id, Todo todo)
+        public ApiResponse<Todo> UpdateTodo(int id, EditTodoDto todo)
         {
             ApiResponse<Todo> apiResponse = new ApiResponse<Todo>();
             try

@@ -46,7 +46,7 @@ namespace Web.Client.ApiController
 
         // PUT api/<TodoController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Todo todo)
+        public IActionResult Put(int id, [FromBody] EditTodoDto todo)
         {
             var userId = HttpContext.Session.GetString("Id");
             todo.UserId = userId!;
