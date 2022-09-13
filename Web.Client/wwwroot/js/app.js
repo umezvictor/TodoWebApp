@@ -1,89 +1,20 @@
 ﻿$(document).ready(function () {
-   // alert('hello');
-
-
-    //$.ajax({
-    //    url: 'http://localhost:3002/api/GetCompanies',  
-    //        type: 'GET',
-    //        dataType: 'json', 
-    //        success: function (data, textStatus, xhr) {
-    //        console.log(data);
-        
-    //},
-    //    error: function (xhr, textStatus, errorThrown) {
-    //        console.log('Error in Database');
-                           
-    //    }  
-    //    });
-
-
-
-    //$(document).on('click', '.edit', function () {
-
-    //    var title = $('#title').text();
-
-        
-    //    $('#editModal').modal('show');//load modal
-
-
-    //    $('#etitle').val(title);
-      
-
-    //});
-
-
-    // code to read selected table row cell data (values).
-    $("#basic-datatable").on('click', '.edit', function () {
-        // get the current row
-        var currentRow = $(this).closest("tr");
-
-        //var id = currentRow.find("td:eq(0)").html(); // get current row 1st table cell TD value
-        var title = currentRow.find("td:eq(0)").html(); // get current row 2nd table cell TD value
-        //var col3 = currentRow.find("td:eq(2)").html(); // get current row 3rd table cell  TD value
-       // var data = col1 + "\n" + col2 + "\n" + col3;
-
-        //alert(data);
-
-        $('#editModal').modal('show');//load modal
-
-
-        $('#etitle').val(title);
-    });
-
-
-
-
-    // code to read selected table row cell data (values).
-    $("#basic-datatable").on('click', '.delete', function () {
-        // get the current row
-        var myid = $(this).closest("tr").attr('id');
-
-       
-        alert(myid);
-
-       
-    });
+    loadTodos();
 
 });
-
-
-//data-toggle="modal" data-target="#editModal"
 
 
 //add todo
 $("#addTodoForm").submit(function (event) {
     event.preventDefault();
     //get values
-    //var todo = new Object();
-    //todo.name = $('#name').val();
-    //person.surname = $('#surname').val();
-    var title = $('#title').val();
-    alert(title);
+    var titleText = $('#title').val();
+    
     //$.ajax({
-    //    url: 'http://localhost:3413/api/person',
+    //    url: 'https://localhost:5002/api/Todo',
     //    type: 'POST',
-    //    dataType: 'json',
-    //    data: person,
+    //    dataType: 'application/json; charset=UTF-8',
+    //    data: JSON.stringify({ "title": titleText }),
     //    success: function (data, textStatus, xhr) {
     //        console.log(data);
     //    },
@@ -91,6 +22,21 @@ $("#addTodoForm").submit(function (event) {
     //        console.log('Error in Operation');
     //    }
     //});
+
+
+
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: 'https://localhost:5002/api/Todo',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify({ "title": titleText }),
+        beforeSend: function () {
+        }, success: function (data) {
+        }, complete: function () {
+        }, error: function (data) {
+        }
+    });
 });
 
 
@@ -145,3 +91,131 @@ $("#delTodo").click(function () {
     //    }
     //});
 });
+
+
+function deleteTodo(todoId) {
+    alert(todoId);
+}
+
+//https://localhost:5002/api/todo
+
+
+function loadTodos() {
+
+    //alert('hello');
+
+    //var notyf = new Notyf({
+    //    duration: 5000,
+    //    position: {
+    //        x: 'right',
+    //        y: 'top',
+    //    }
+    //});
+
+    var tableHolderDiv = document.getElementById('tableHolder');
+    //clear the table
+    tableHolderDiv.innerHTML = "";
+
+    fetch('https://localhost:5002/api/todo', {
+        method: "GET"
+    })
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+
+
+                //console.log(res.payload);
+                const table = document.createElement('table');
+                table.setAttribute("id", "basic-datatable");
+                table.setAttribute("class", "table table-striped table-bordered table-sm key-button");
+
+                const tableHead = document.createElement('thead');
+                const trmain = document.createElement('tr');
+
+                const thTitle = document.createElement('th');
+                thTitle.innerText = "Title";
+
+                const thCompleted = document.createElement('th');
+                thCompleted.innerText = "Completed";
+
+
+               const thActions = document.createElement('th');
+               thActions.innerText = "Actions";
+
+                trmain.appendChild(thTitle);
+                trmain.appendChild(thCompleted);
+                trmain.appendChild(thActions);
+
+
+                tableHead.appendChild(trmain);
+                table.appendChild(tableHead);
+
+                var tbody = document.createElement('tbody');
+
+                for (let i = 0; i < res.payload.length; i++) {                  
+                   //create a tr 
+                    let tr = document.createElement('tr');
+                   
+                    //create tds
+                    let titleTd = document.createElement('td');                   
+                    let completeTd = document.createElement('td');
+                    let actionsTd = document.createElement('td');
+
+                    //add edit button
+                    var editBtn = document.createElement("button");
+                    editBtn.innerHTML = "Edit";
+                    editBtn.setAttribute('type', 'button');
+                    editBtn.setAttribute('class', 'btn btn-success btn-sm');
+
+                    editBtn.addEventListener("click", function (event) {
+                        //populate and display edit modal here
+                        $('#editModal').modal('show');
+                        $('#todoId').val(res.payload[i].id);
+                        $('#etitle').val(res.payload[i].title);
+                    });
+                    actionsTd.appendChild(editBtn);
+
+
+                    //add delete button
+                    var deleteBtn = document.createElement("button");
+                    deleteBtn.innerHTML = "Delete";
+                    deleteBtn.setAttribute('type', 'button');
+                    deleteBtn.setAttribute('class', 'btn btn-danger btn-sm ml-2');
+
+                    deleteBtn.addEventListener("click", function (event) {
+                        deleteTodo(res.payload[i].id);
+                    });
+                    actionsTd.appendChild(deleteBtn);
+
+
+                    let titleText = document.createTextNode(res.payload[i].title);                   
+                    let completedText = document.createTextNode(res.payload[i].completed);           
+
+                   //set text nodes inside tds
+                    titleTd.appendChild(titleText);
+                    completeTd.appendChild(completedText);
+
+
+                   //appends tds to tr
+                    tr.appendChild(titleTd);
+                    tr.appendChild(completeTd);
+                    tr.appendChild(actionsTd);
+
+            
+
+                   //append tr to tbody
+                   tbody.appendChild(tr);
+                }
+               
+                table.appendChild(tbody);
+                tableHolderDiv.appendChild(table);
+                $('#basic-datatable').DataTable();
+            
+
+            }else {
+                console.log('bad');
+            }
+        })
+        .catch (err => notyf.error("An error occured"));
+
+}

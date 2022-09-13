@@ -21,6 +21,7 @@ namespace Web.Client.Extensions
             services.AddTransient<IUserManagementService, UserManagementService>();
             services.AddTransient<IAuthService, AuthService>();        
             services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<ITodoService, TodoService>();
             services.AddScoped<AuthenticationFilter>();
 
             services.Configure<IdentityOptions>(options =>

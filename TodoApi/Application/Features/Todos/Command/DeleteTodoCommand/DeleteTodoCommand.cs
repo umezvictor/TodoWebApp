@@ -30,21 +30,11 @@ namespace Application.Features.Todos.Command
             public async Task<Response<TodoDto>> Handle(DeleteTodoCommand command, CancellationToken cancellationToken)
             {
                 var todo = await _todoRepository.GetByIdAsync(command.Id);
-                if (todo == null) throw new ApiException($"Todo item not found.");
-                //if (command.IsDeleted == true)
-                //{
-                //    assignment.IsDeleted = true;
-                //    await _todoRepository.UpdateAsync(assignment);
-                //    return new Response<int>(assignment.Id);
-                //}
-                //else
-                //{
-                
+                if (todo == null) throw new ApiException($"Todo item not found.");                             
                     todo.IsDeleted = true;
                     await _todoRepository.DeleteAsync(todo);
                     var response = _mapper.Map<TodoDto>(todo);
                     return new Response<TodoDto>(response);
-                //}
             }
         }
     }
