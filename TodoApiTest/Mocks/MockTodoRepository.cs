@@ -31,6 +31,8 @@ namespace TodoApiTest.Mocks
                 }
             };
 
+
+
             var mockRepo = new Mock<ITodoRepositoryAsync>();  
             //for get all
             mockRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(todos);
@@ -41,8 +43,11 @@ namespace TodoApiTest.Mocks
                 return todo;
             });
 
+            mockRepo.Setup(m => m.UpdateAsync(It.IsAny<Todo>()))
+                .Callback(() => { return; });
+
             //update
-            mockRepo.Setup(x => x.UpdateAsync(It.IsAny<Todo>()));
+            //mockRepo.Setup(x => x.UpdateAsync(It.IsAny<Todo>()));
             //delete
             mockRepo.Setup(x => x.DeleteAsync(It.IsAny<Todo>()));
 
