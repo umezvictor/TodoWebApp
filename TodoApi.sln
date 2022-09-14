@@ -24,9 +24,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "TodoApi\Shared\Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "TodoApi\Api\Api.csproj", "{E8DC8EFB-43AA-4823-948A-D2D00CA1864F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Client", "Web.Client\Web.Client.csproj", "{01FCE087-D232-40CB-A24A-795B81F5B754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Client", "Web.Client\Web.Client.csproj", "{01FCE087-D232-40CB-A24A-795B81F5B754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{2B2FD265-789C-4742-9478-B4EA2A30FAA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{2B2FD265-789C-4742-9478-B4EA2A30FAA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{33924BF1-18DA-48FE-8A2F-B908A2D68877}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApiTest", "TodoApiTest\TodoApiTest.csproj", "{96DEEABA-4E55-4065-85D8-DFE154F7960E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +66,10 @@ Global
 		{2B2FD265-789C-4742-9478-B4EA2A30FAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B2FD265-789C-4742-9478-B4EA2A30FAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B2FD265-789C-4742-9478-B4EA2A30FAA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96DEEABA-4E55-4065-85D8-DFE154F7960E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96DEEABA-4E55-4065-85D8-DFE154F7960E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96DEEABA-4E55-4065-85D8-DFE154F7960E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96DEEABA-4E55-4065-85D8-DFE154F7960E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +82,7 @@ Global
 		{E8DC8EFB-43AA-4823-948A-D2D00CA1864F} = {5FD66185-DB90-429A-83AE-A1213A7C191A}
 		{01FCE087-D232-40CB-A24A-795B81F5B754} = {5FD66185-DB90-429A-83AE-A1213A7C191A}
 		{2B2FD265-789C-4742-9478-B4EA2A30FAA7} = {5FD66185-DB90-429A-83AE-A1213A7C191A}
+		{96DEEABA-4E55-4065-85D8-DFE154F7960E} = {33924BF1-18DA-48FE-8A2F-B908A2D68877}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F009EC59-8CEF-4A96-8F19-2E5EFB74370B}
