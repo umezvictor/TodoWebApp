@@ -15,7 +15,7 @@ var metrics = AppMetrics.CreateDefaultBuilder()
     .OutputMetrics.AsPrometheusProtobuf()
     .Report.ToHostedMetrics(options => {
         options.HostedMetrics.BaseUri = uri;
-        options.HostedMetrics.ApiKey = "eyJrIjoiZDEwODYzZTEwYmJmYjRmNTNmYmRkOGEzZTcxZjU1MjZiNjdmOWQzYyIsIm4iOiJUb2RvQXBwS2V5IiwiaWQiOjcwOTQwMX0=";
+        options.HostedMetrics.ApiKey = "";
         options.HttpPolicy.BackoffPeriod = TimeSpan.FromSeconds(30);
         options.HttpPolicy.FailuresBeforeBackoff = 5;
         options.HttpPolicy.Timeout = TimeSpan.FromSeconds(10);
