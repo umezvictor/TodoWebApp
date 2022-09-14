@@ -3,11 +3,12 @@
     public class ErrorHandlerMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<ErrorHandlerMiddleware> _logger;
 
-
-        public ErrorHandlerMiddleware(RequestDelegate next)
+        public ErrorHandlerMiddleware(RequestDelegate next, ILogger<ErrorHandlerMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -25,7 +26,7 @@
 
                 if (error.InnerException != null)
                 {
-                   // errors.Add(error.InnerException.Message);
+                    _logger.LogError(error.InnerException.Message);
                     errors.Add("Error", new string[] { error.InnerException.Message });
                 }
 
@@ -41,21 +42,23 @@
                         // custom application error
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         responseModel = new Response<string>() { Succeeded = false, Message = error.Message, Errors = errors };
+                        _logger.LogError(error.Message);
                         break;
                     case ValidationException e:
                         // custom application error
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                          responseModel.Errors = e.Errors;
-                        //responseModel.Errors = (List<string>)e.Errors;
-                        //responseModel.Errors = e.Errors;
+                        _logger.LogError(error.Message);
                         break;
                     case KeyNotFoundException e:
                         // not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;
+                        _logger.LogError(error.Message);
                         break;
                     default:
                         // unhandled error
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        _logger.LogError(error.Message);
                         break;
                 }
                 var result = System.Text.Json.JsonSerializer.Serialize(responseModel);

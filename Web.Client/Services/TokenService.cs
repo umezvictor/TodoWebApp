@@ -52,8 +52,9 @@ namespace Web.Client.Services
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 //get user id from token
+                var defaultGuid = Guid.Parse("00000000-0000-0000-0000-000000000000");
                 var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "Id").Value);
-                if (userId != null)
+                if (userId != defaultGuid)
                     return true;
                 return false;
             }
