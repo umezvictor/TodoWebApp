@@ -23,11 +23,7 @@ namespace Application.Features.Todos.Command
             RuleFor(p => p.UserId)
                 .NotEmpty().WithMessage("{User Id} is required.")
                 .NotNull();
-
-            RuleFor(p => p.Completed)
-               .NotEmpty().WithMessage("{Completed} is required.")
-               .NotNull();
-
+           
         }
 
 

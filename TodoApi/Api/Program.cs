@@ -88,10 +88,7 @@ builder.Services.AddMetrics(metrics);
 builder.Services.AddMetricsTrackingMiddleware();
 builder.Services.AddMetricsEndpoints();
 
-//promotheus - plain text formatting
-//var metrics2 = new MetricsBuilder()
-//    .OutputMetrics.AsPrometheusPlainText()
-//    .Build();
+
 
 //Bearer:   default schema
 builder.Services.AddAuthentication("Bearer")
@@ -106,7 +103,7 @@ builder.Services.AddAuthentication("Bearer")
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("client_id", "todoClient"));
+    options.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("client_id", "a93d9ff5-fc41-401d-9007-6501553fbeaa"));
 });
 
 

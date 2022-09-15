@@ -13,42 +13,13 @@ namespace IdentityServer
           {
                    new Client
                    {
-                        ClientId = "todoClient",
+                        ClientId = "a93d9ff5-fc41-401d-9007-6501553fbeaa",
                         AllowedGrantTypes = GrantTypes.ClientCredentials,
                         ClientSecrets =
                         {
-                            new Secret("secret".Sha256())
+                            new Secret("rDxKG5Rm6bW3APA4yk7P+Q==".Sha256())
                         },
                         AllowedScopes = { "todoAPI" }
-                   },
-                   new Client
-                   {
-                       ClientId = "todo_mvc_client",
-                       ClientName = "Todo MVC Web App",
-                       AllowedGrantTypes = GrantTypes.Code,
-                       RequirePkce = false,
-                       AllowRememberConsent = false,
-                       RedirectUris = new List<string>()
-                       {
-                           "https://localhost:5002/signin-oidc"
-                       },
-                       PostLogoutRedirectUris = new List<string>()
-                       {
-                           "https://localhost:5002/signout-callback-oidc"
-                       },
-                       ClientSecrets = new List<Secret>
-                       {
-                           new Secret("secret".Sha256())
-                       },
-                       AllowedScopes = new List<string>
-                       {
-                           IdentityServerConstants.StandardScopes.OpenId,
-                           IdentityServerConstants.StandardScopes.Profile,
-                           IdentityServerConstants.StandardScopes.Address,
-                           IdentityServerConstants.StandardScopes.Email,
-                           "todoAPI",
-                           "roles"
-                       }
                    }
           };
 

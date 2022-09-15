@@ -77,6 +77,23 @@ namespace Web.Client.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult Logout()
+        {
+
+            HttpContext.Session.Clear();
+            ClearCookies();
+            return RedirectToAction("Login", "Auth");
+        }
+
+
+        private void ClearCookies()
+        {
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
+        }
     }
 
 
