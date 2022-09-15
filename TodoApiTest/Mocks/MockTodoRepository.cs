@@ -31,24 +31,26 @@ namespace TodoApiTest.Mocks
                 }
             };
 
+            var myTodo = new Todo()
+            {
+                Id = 1,
+                Title = "test",
+                Completed = false,  
+                UserId = "1",
+            };
 
-
+            
             var mockRepo = new Mock<ITodoRepositoryAsync>();  
-            //for get all
             mockRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(todos);
-            //for add
+            mockRepo.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(myTodo);
+
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Todo>())).ReturnsAsync((Todo todo) =>
             {
                 todos.Add(todo);
                 return todo;
             });
 
-            mockRepo.Setup(m => m.UpdateAsync(It.IsAny<Todo>()))
-                .Callback(() => { return; });
-
-            //update
-            //mockRepo.Setup(x => x.UpdateAsync(It.IsAny<Todo>()));
-            //delete
+            mockRepo.Setup(x => x.UpdateAsync(It.IsAny<Todo>()));
             mockRepo.Setup(x => x.DeleteAsync(It.IsAny<Todo>()));
 
             return mockRepo;

@@ -39,9 +39,10 @@ namespace TodoApiTest.Todos.Commands
         [Fact]
         public async Task UpdateTodoTest()
         {
+            
              var handler = new UpdateTodoCommandHandler(_mockRepo.Object, _mapper);
-             //await handler.Handle(new UpdateTodoCommand(), CancellationToken.None);
-             var result = await handler.Handle(new UpdateTodoCommand(), CancellationToken.None);
+            
+            var result = await handler.Handle(new UpdateTodoCommand(), CancellationToken.None);
              result.ShouldBeOfType<Response<TodoDto>>();
 
         }
