@@ -101,6 +101,7 @@ builder.Services.AddAuthentication("Bearer")
            };
        });
 
+//client id should match what you have in Config.cs inside Identity server project
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("client_id", "a93d9ff5-fc41-401d-9007-6501553fbeaa"));

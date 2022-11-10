@@ -4,10 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
-
-
 using FluentValidation;
 using MediatR;
 using System;
@@ -22,7 +18,7 @@ namespace Application.Behaviours
 
 {
     //this class will run all validations before executing the request
-    //evry mediator request will hit this class
+    //every mediator request will hit this class
     //IPipelineBehavior is used to intercept requests before and after the handler class
     //here, you intercept request, perform validations and handle exceptions
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
